@@ -12,6 +12,9 @@ LICENSE="GPLv3"
 LIC_FILES_CHKSUM = "file://../OSCAM-LICENSE;md5=d32239bcb673463ab874e80d47fae504"
 
 DEPENDS += "libusb openssl"
+RDEPENDS:${PN} += "libdvbcsa libusb1"
+
+LDFLAGS:prepend = "-ldvbcsa"
 
 EXTRA_OECMAKE += "\
 	-DWEBIF=1 \
@@ -24,6 +27,8 @@ EXTRA_OECMAKE += "\
 	-DWITH_STAPI=0 \
 	-DHAVE_LIBUSB=1 \
 	-DSTATIC_LIBUSB=0 \
+	-DMODULE_STREAMRELAY=1 \
+	-DHAVE_LIBDVBCSA=1 \
 "
 
 do_install () {
